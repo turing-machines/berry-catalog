@@ -9,11 +9,15 @@ setup:
       type: string
       default: anthropic
       enum: [anthropic, openai, google, groq, ollama]
-      description: which provider goose dials — it reads the machine's model wire from the env; change only for a non-default provider
+      description: which provider face goose speaks — it rides the env (the machine delivers this volume's settings to the harness by name); the machine's socket answers this face and forces its OWN model, so change it only to speak a different wire face
+    GOOSE_MODEL:
+      type: string
+      default: claude-sonnet-4-20250514
+      description: the model NAME goose sends — nominal, because the machine's socket forces its own model whatever the name; goose only refuses to start with none set, so any valid spelling for the provider does
   stand:
     - spawn: goose
       protocol: acp
-      command: 'B="$HOME/.local/bin/goose"; [ -x "$B" ] || curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | CONFIGURE=false bash 1>&2; exec "$B" acp'
+      command: 'B="$HOME/.local/bin/goose"; [ -x "$B" ] || curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | CONFIGURE=false bash 1>&2; export ANTHROPIC_HOST="${ANTHROPIC_HOST:-$ANTHROPIC_BASE_URL}"; exec "$B" acp'
 metadata:
   identity: goose/1
 ---
@@ -22,15 +26,26 @@ DRIVEN AGENT over ACP (lookup("resident-skill") § THE DRIVEN WIRE
 holds the general law: the stand, the drive, the served hands, the
 proof; this volume holds only goose's own knobs).
 
-THE WIRE — goose reads its provider from the env, and the machine
-bakes its OWN model socket into every call and service (the self-wire:
-base URL + key under the common conventions). There is no vendor
-sign-in to hunt and no per-run --model choice: point goose at the
-machine's wire and the model answers. WHICH model is the machine's
-identity, never goose's to pick. Read `goose configure` and
-`goose --help` WHOLE before standing — goose's provider knobs drift
-between versions, and its help is the contract this volume's names
-were verified against.
+THE WIRE — AGNOSTIC, no real vendor key. The machine bakes its OWN
+model socket into every resident's env (the self-wire: base URL + key
+under the STANDARD conventions, `ANTHROPIC_BASE_URL` / `OPENAI_BASE_URL`),
+and it delivers THIS volume's settings to goose's env by name. goose
+needs three env facts and gets all three without a vendor account:
+  • GOOSE_PROVIDER (which wire face) and GOOSE_MODEL (a nominal name) —
+    this volume's settings, delivered to the env by the machine;
+  • the BASE URL — goose spells it `ANTHROPIC_HOST`, not the standard
+    `ANTHROPIC_BASE_URL`, so the stand line ALIASES it
+    (`ANTHROPIC_HOST="${ANTHROPIC_HOST:-$ANTHROPIC_BASE_URL}"`): goose's
+    own quirk adapted to the machine's standard wire, IN THIS VOLUME —
+    the machine stays agnostic, never goose-shaped.
+So goose dials the machine's socket, the socket answers the provider's
+face and FORCES its own model whatever GOOSE_MODEL says, and the call
+lands on goose's foreign plane and spends the machine's wallet. No
+vendor sign-in, no per-run --model. Read `goose configure` and
+`goose --help` WHOLE before standing — goose's env spellings drift
+between versions, and its help is the contract this volume was verified
+against (the base-URL var especially: if a build reads a different
+name, alias THAT one here, never touch the machine).
 
 INSTALL — reboot-proof or it dies at the next boot: what lands outside
 /work reverts at a jail reboot while the journaled stand re-runs
